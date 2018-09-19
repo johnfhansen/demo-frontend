@@ -1,0 +1,21 @@
+# Build
+#FROM node:10.10 as builder
+FROM node:10.10
+
+ENV SRC /usr/src/app
+ENV BUILT_DIR $SRC/dist/pozo-demo
+RUN mkdir "$SRC"
+WORKDIR "$SRC"
+COPY . "$SRC"
+RUN npm install
+RUN npm run-script build
+
+FROM nginx:stable-alpine
+ENV BUILT_DIR $SRC/dist/pozo-demo
+
+COPY --from=0 /usr/src/app/dist/pozo-demo /usr/share/nginx/html
+
+
+
+
+
