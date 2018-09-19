@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+  demotest-frontend:
+    container_name: demotest-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile_prod
+    ports:
+      - '8048:80'
